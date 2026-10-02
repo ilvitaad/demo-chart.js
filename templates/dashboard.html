@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prueba Chart.js + Flask</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+</head>
+
+<body>
+
+<div class="container py-4">
+
+    <h1 class="mb-4">
+        Prueba de gráficos
+    </h1>
+
+    <div class="card">
+        <div class="card-body">
+
+            <!-- Gráfico 1 -->
+            <h5 class="card-title">
+                Pedidos por estado
+            </h5>
+
+            <div>
+                <canvas id="pedidosChart"></canvas>
+            </div>
+
+            <hr class="my-4">
+
+            <!-- Gráfico 2 -->
+            <h5 class="card-title">
+                Canales de pedidos
+            </h5>
+
+            <div style="max-width: 500px; margin: auto;">
+                <canvas id="canalesChart"></canvas>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Chart.js -->
+<!--carga Chart.js-->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Datos enviados desde Flask -->
+<script>
+    const estadosDesdeFlask = {{ estados | tojson }};
+    const cantidadesDesdeFlask = {{ cantidades | tojson }};
+</script>
+
+<!-- Plugin de etiquetas -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+<!-- Nuestro JavaScript -->
+<!--hace que Flask/Jinja2 cargue nuestro JavaScript-->
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+
+</body>
+</html>
